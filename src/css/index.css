@@ -25,3 +25,9 @@ i:hover{
 .table .edit{
     color: orange;
 }
+
+.QuoteView{
+    max-width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
