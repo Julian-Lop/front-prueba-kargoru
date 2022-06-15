@@ -9,7 +9,7 @@ export default function QuoteView(){
         <div className="QuoteView">
             <div className='container'>
                     {v?<div className="card">
-
+                    <h1 className='m-2'>Vista de cotización</h1>
                     <div className="card-body">
                         <h5 className="card-title">Cotizacion ID:{id}</h5>
                         <h6>Para: Julian Andres Lopez Castañeda</h6>
