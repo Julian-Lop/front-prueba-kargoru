@@ -29,13 +29,13 @@ export default function QuotesTable(){
                     </thead>
                     <tbody className="table-group-divider">
                         {quotes.length?quotes.map(quote => (
-                            <tr>
+                            <tr key={quote.id}>
                                 <th scope="row">{quote.id}</th>
                                 <td>{quote.usuario.nombre}</td>
                                 <td>{quote.usuario.email}</td>
                                 <td>
                                     <Link to={'/quoteview/'+quote.id} className='view'><i className="fas fa-eye m-2"></i></Link>
-                                    <Link to={'/quoteview/'+quote.id} className='edit'><i className="fas fa-pen m-2"></i></Link>
+                                    <Link to={'/editquote/'+quote.id} className='edit'><i className="fas fa-pen m-2"></i></Link>
                                     <i className="fas fa-trash m-2"></i>
                                 </td>
                             </tr>
