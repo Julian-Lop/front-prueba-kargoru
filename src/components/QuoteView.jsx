@@ -19,20 +19,19 @@ export default function QuoteView(){
 
 
     return (
-        <div className="QuoteView">
-            <div className='container'>
-                    {currentQuote && locations.length?<div className="card">
-                    <h1 className='m-2'>Vista de cotización</h1>
-                    <div className="card-body">
-                        <h5 className="card-title">Cotizacion ID:{currentQuote.id}</h5>
+        <div class="QuoteView">
+            <div class='container'>
+                    {currentQuote.usuario && locations.length?<div class="card">
+                    <h1 class='m-2'>Vista de cotización</h1>
+                    <div class="card-body">
+                        <h5 class="card-title">Cotizacion ID:{currentQuote.id}</h5>
                         <h6>Para: {currentQuote.usuario.nombre}</h6>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <br></br>
+                        
                         <label>Email:</label>
                         <input type="text" class="form-control" id="email" value={currentQuote.usuario.email} disabled={true} />
                         <hr></hr>
-                       
-                       
 
                         <label>Celular:</label>
                         <input type="text" class="form-control" id="celular" value={currentQuote.usuario.celular} disabled={true} />
@@ -66,17 +65,17 @@ export default function QuoteView(){
                     </div>
                     </div>
                     :
-                    <div className="card" aria-hidden="true">
-                        <div className="card-body">
-                            <h5 className="card-title placeholder-glow">
-                            <span className="placeholder col-6"></span>
+                    <div class="card" aria-hidden="true">
+                        <div class="card-body">
+                            <h5 class="card-title placeholder-glow">
+                            <span class="placeholder col-6"></span>
                             </h5>
-                            <p className="card-text placeholder-glow">
-                            <span className="placeholder col-7"></span>
-                            <span className="placeholder col-4"></span>
-                            <span className="placeholder col-4"></span>
-                            <span className="placeholder col-6"></span>
-                            <span className="placeholder col-8"></span>
+                            <p class="card-text placeholder-glow">
+                            <span class="placeholder col-7"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-6"></span>
+                            <span class="placeholder col-8"></span>
                             </p>
                         </div>
                     </div>
