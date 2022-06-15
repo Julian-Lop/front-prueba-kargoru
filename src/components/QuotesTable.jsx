@@ -34,8 +34,8 @@ export default function QuotesTable(){
                                 <td>{quote.usuario.nombre}</td>
                                 <td>{quote.usuario.email}</td>
                                 <td>
-                                    <Link to='/quoteview/1' className='view'><i className="fas fa-eye m-2"></i></Link>
-                                    <Link to='/editquote/1' className='edit'><i className="fas fa-pen m-2"></i></Link>
+                                    <Link to={'/quoteview/'+quote.id} className='view'><i className="fas fa-eye m-2"></i></Link>
+                                    <Link to={'/quoteview/'+quote.id} className='edit'><i className="fas fa-pen m-2"></i></Link>
                                     <i className="fas fa-trash m-2"></i>
                                 </td>
                             </tr>
