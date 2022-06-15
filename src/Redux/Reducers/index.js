@@ -12,7 +12,6 @@ const initialState = {
     quotes : [],
     locations : [],
     vehicles : [],
-    quotes : [],
     currentQuote : [] 
 }
 
