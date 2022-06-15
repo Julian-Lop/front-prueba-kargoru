@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Navbar from './components/Navbar'
 import CreateQuote from './components/CreateQuote';
 import QuotesTable from './components/QuotesTable';
