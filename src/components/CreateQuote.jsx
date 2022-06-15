@@ -62,6 +62,7 @@ export default function CreateQuote(){
                         <button type="submit" className="btn btn-primary">Enviar cotización</button>
                     </div>
                 </form>
+                <br></br>
             </div>    
         </div>
     )
