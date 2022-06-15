@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import '../css/index.css'
 
 
@@ -20,8 +21,8 @@ export default function QuotesTable(){
                             <td>Mark</td>
                             <td>Otto</td>
                             <td>
-                                <i className="fas fa-eye m-2"></i>
-                                <i className="fas fa-pen m-2"></i>
+                                <Link to='/quoteview/1' className='view'><i className="fas fa-eye m-2"></i></Link>
+                                <Link to='/editquote/1' className='edit'><i className="fas fa-pen m-2"></i></Link>
                                 <i className="fas fa-trash m-2"></i>
                             </td>
                         </tr>
@@ -30,17 +31,17 @@ export default function QuotesTable(){
                             <td>Jacob</td>
                             <td>Thornton</td>
                             <td>
-                                <i className="fas fa-eye m-2"></i>
-                                <i className="fas fa-pen m-2"></i>
+                                <Link to='/quoteview/2' className='view'><i className="fas fa-eye m-2"></i></Link>
+                                <Link to='/editquote/2' className='edit'><i className="fas fa-pen m-2"></i></Link>
                                 <i className="fas fa-trash m-2"></i>
                             </td>
                         </tr>
                         <tr>
                         <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
+                            <td colSpan="2">Larry the Bird</td>
                             <td>
-                            <i className="fas fa-eye m-2"></i>
-                                <i className="fas fa-pen m-2"></i>
+                                <Link to='/quoteview/3' className='view'><i className="fas fa-eye m-2"></i></Link>
+                                <Link to='/editquote/3' className='edit'><i className="fas fa-pen m-2"></i></Link>
                                 <i className="fas fa-trash m-2"></i>
                             </td>
                         </tr>
