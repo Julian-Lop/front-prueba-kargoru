@@ -1,50 +1,45 @@
 import {Link} from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
+import {getAllQuotes} from '../Redux/Actions/index'
 import '../css/index.css'
+import { useEffect } from 'react'
 
 
 export default function QuotesTable(){
+
+    const dispatch = useDispatch()
+
+    const quotes = useSelector((state) => state.quotes)
+
+    useEffect(()=>{
+        dispatch(getAllQuotes())
+    },[])
+
     return(
         <div className="QuotesTable">
             <div className='container'>
                 <table className="table">
                     <thead className='table-dark'>
                         <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">ID Cotización</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
                         <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody className="table-group-divider">
-                        <tr>
-                        <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>
-                                <Link to='/quoteview/1' className='view'><i className="fas fa-eye m-2"></i></Link>
-                                <Link to='/editquote/1' className='edit'><i className="fas fa-pen m-2"></i></Link>
-                                <i className="fas fa-trash m-2"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                        <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>
-                                <Link to='/quoteview/2' className='view'><i className="fas fa-eye m-2"></i></Link>
-                                <Link to='/editquote/2' className='edit'><i className="fas fa-pen m-2"></i></Link>
-                                <i className="fas fa-trash m-2"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                            <td colSpan="2">Larry the Bird</td>
-                            <td>
-                                <Link to='/quoteview/3' className='view'><i className="fas fa-eye m-2"></i></Link>
-                                <Link to='/editquote/3' className='edit'><i className="fas fa-pen m-2"></i></Link>
-                                <i className="fas fa-trash m-2"></i>
-                            </td>
-                        </tr>
+                        {quotes.length?quotes.map(quote => (
+                            <tr>
+                                <th scope="row">{quote.id}</th>
+                                <td>{quote.usuario.nombre}</td>
+                                <td>{quote.usuario.email}</td>
+                                <td>
+                                    <Link to='/quoteview/1' className='view'><i className="fas fa-eye m-2"></i></Link>
+                                    <Link to='/editquote/1' className='edit'><i className="fas fa-pen m-2"></i></Link>
+                                    <i className="fas fa-trash m-2"></i>
+                                </td>
+                            </tr>
+                        )):null}
                     </tbody>
                 </table>
             </div>
