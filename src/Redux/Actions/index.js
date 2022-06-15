@@ -49,7 +49,7 @@ export const getAllQuotes = () => {
 export const getQuote = (id) => {
     return async function(dispatch){
         try {
-            let json = await axios(url+'/getQuote/:'+id)
+            let json = await axios(url+'/getQuote/'+id)
             if(json.data.cotizacion) return dispatch({type:GET_QUOTE, payload: json.data.cotizacion})
         } catch (error) {
             console.log(error)
