@@ -2,7 +2,7 @@ import '../css/index.css'
 
 export default function CreateQuote(){
     return(
-        <div className="CreateQuote ">
+        <div className="CreateQuote">
             <div className="container">
                 <form className="row g-3">
                     <div className="col-md-6">
