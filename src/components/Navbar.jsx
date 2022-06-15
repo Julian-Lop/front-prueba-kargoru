@@ -1,9 +1,9 @@
-
+import '../css/index.css'
 
 export default function Navbar(){
     return (
         <div className="Navbar">
-             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+             <nav className="navbar navbar-expand-lg navbar-dark bg-dark position-absolute top-0 start-0">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">Home</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
