@@ -1,0 +1,8 @@
+export const GET_ALL_LOCATION = 'GET_ALL_LOCATION'
+export const GET_ALL_VEHICLES = 'GET_ALL_VEHICLES'
+export const GET_ALL_QUOTES = 'GET_ALL_QUOTES'
+export const GET_QUOTE = 'GET_QUOTE'
+export const CREATE_QUOTE = 'CREATE_QUOTE'
+export const EDIT_QUOTE = 'EDIT_QUOTE'
+export const DELETE_QUOTE = 'DELETE_QUOTE'
+export const CREATE_USER = 'CREATE_USER'
