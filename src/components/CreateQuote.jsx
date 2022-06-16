@@ -58,6 +58,13 @@ export default function CreateQuote(){
 
     const submitQuote = async (e) => {
         e.preventDefault()
+        if(/\s/.test(user.nombre) || /\s/.test(user.celular) || 
+        /\s/.test(user.email)) return alert('esapacios en blanco')
+
+        if(/\s/.test(quote.origen) || /\s/.test(quote.destino) || 
+        /\s/.test(quote.fechaSalida) || /\s/.test(quote.fechaLlegada) 
+        || /\s/.test(quote.costo) || /\s/.test(quote.vehiculo))return alert('espacios en blanco')
+
         if(quote.email && quote.origen && quote.destino && 
             quote.fechaSalida && quote.fechaLlegada && 
             quote.vehiculo && quote.costo && user.nombre

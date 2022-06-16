@@ -60,6 +60,14 @@ export default function EditQuote(){
 
     const submitQuote = async (e) => {
         e.preventDefault()
+
+        if(/\s/.test(quote.nombre) || /\s/.test(quote.celular) || 
+        /\s/.test(quote.email)) return alert('esapacios en blanco')
+
+        if(/\s/.test(quote.origen) || /\s/.test(quote.destino) || 
+        /\s/.test(quote.fechaSalida) || /\s/.test(quote.fechaLlegada) 
+        || /\s/.test(quote.costo) || /\s/.test(quote.vehiculo))return alert('espacios en blanco')
+
         if(quote.email && quote.celular && quote.origen && quote.destino && quote.fechaSalida
             && quote.fechaLlegada && quote.costo && quote.vehiculo){
                 await dispatch(createUser(quote))
@@ -74,11 +82,11 @@ export default function EditQuote(){
         <div className='EditQuote'>
             <div className="container">
 
-            {locations.length && currentQuote && quote.email?<div className="card">
+            {locations.length && currentQuote && quote?<div className="card">
                 <h1 className='m-2'>Editar cotización</h1>
                 <div className="card-body">
                     <h5 className="card-title">Cotizacion ID:{id}</h5>
-                    <h6>Para: {quote.nombre}</h6>
+                    <h6>Para: {quote.email?quote.nombre:null}</h6>
                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     <br></br>
                     
