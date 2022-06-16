@@ -82,7 +82,7 @@ export const editQuote = (quote) => {
 export const deleteQuote = (id) => {
     return async function(dispatch){
         try {
-            let json = await axios.delete(url+'/deleteQuote',id)
+            let json = await axios.delete(url+'/deleteQuote/'+id)
             if(json.data.borrado) return dispatch({type:DELETE_QUOTE,payload:json.data.borrado})
         } catch (error) {
             console.log(error)
