@@ -15,7 +15,6 @@ export default function CreateQuotation(){
             origen:'',
             destino:'',
             fechaSalida:'',
-            fechaLlegada:'',
             costo:'',
             vehiculo:'',
             detalleCarga:''
@@ -51,7 +50,7 @@ export default function CreateQuotation(){
     const checkCost = (e) => {
         e.preventDefault()
         if(quotation.email && quotation.origen && quotation.destino && 
-            quotation.fechaSalida && quotation.fechaLlegada && quotation.vehiculo && quotation.detalleCarga){
+            quotation.fechaSalida && quotation.vehiculo && quotation.detalleCarga){
             return setquotation({...quotation,costo:Math.floor(Math.random(100)*500000)})
         }
         return alert('Hay campos sin llenar')
@@ -63,17 +62,13 @@ export default function CreateQuotation(){
         /\s/.test(user.email)) return alert('espacios en blanco')
 
         if(/\s/.test(quotation.origen) || /\s/.test(quotation.destino) || 
-        /\s/.test(quotation.fechaSalida) || /\s/.test(quotation.fechaLlegada) 
-        || /\s/.test(quotation.costo) || /\s/.test(quotation.vehiculo))return alert('espacios en blanco')
+        /\s/.test(quotation.fechaSalida) || /\s/.test(quotation.costo) || 
+        /\s/.test(quotation.vehiculo))return alert('espacios en blanco')
 
-        let f1 = new Date(quotation.fechaSalida)
-        let f2 = new Date(quotation.fechaLlegada)
-
-        if(f1.getTime() > f2.getTime()) return alert('la fecha de llegada debe ser posterior a la de salida')
 
         if(quotation.email && quotation.origen && quotation.destino && 
-            quotation.fechaSalida && quotation.fechaLlegada && 
-            quotation.vehiculo && quotation.costo && quotation.detalleCarga
+            quotation.fechaSalida && quotation.vehiculo && 
+            quotation.costo && quotation.detalleCarga
             && user.nombre && user.email && user.celular){
             await dispatch(createUser(user))
             await dispatch(createQuotation(quotation))
@@ -82,7 +77,6 @@ export default function CreateQuotation(){
                 origen:'',
                 destino:'',
                 fechaSalida:'',
-                fechaLlegada:'',
                 costo:'',
                 vehiculo:'',
                 detalleCarga:''
@@ -138,10 +132,6 @@ export default function CreateQuotation(){
                     <div className="col-md-4">
                         <label htmlFor="inputCity" className="form-label">Fecha salida</label>
                         <input type="date" className="form-control" id="departureDate" onChange={(e) => handleChangeQuotation(e)} name="fechaSalida"/>
-                    </div>
-                    <div className="col-md-4">
-                        <label htmlFor="inputCity" className="form-label">Fecha llegada</label>
-                        <input type="date" className="form-control" id="arrivalDate" onChange={(e) => handleChangeQuotation(e)} name="fechaLlegada"/>
                     </div>
                     <div className="col-md-4">
                         <label htmlFor="inputState" className="form-label">Tipo de transporte</label>

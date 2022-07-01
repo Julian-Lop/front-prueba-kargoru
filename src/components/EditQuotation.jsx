@@ -21,7 +21,6 @@ export default function EditQuotation(){
             origen:'',
             destino:'',
             fechaSalida:'',
-            fechaLlegada:'',
             costo:'',
             vehiculo:'',
             detalleCarga:''
@@ -47,7 +46,6 @@ export default function EditQuotation(){
         quotation.origen = currentQuotation.origenId
         quotation.destino = currentQuotation.destinoId
         quotation.fechaSalida = currentQuotation.fechaSalida
-        quotation.fechaLlegada = currentQuotation.fechaLlegada
         quotation.costo = currentQuotation.costo
         quotation.vehiculo = currentQuotation.vehiculoId
         quotation.detalleCarga = currentQuotation.detalleCarga
@@ -67,11 +65,11 @@ export default function EditQuotation(){
         /\s/.test(quotation.email)) return alert('esapacios en blanco')
 
         if(/\s/.test(quotation.origen) || /\s/.test(quotation.destino) || 
-        /\s/.test(quotation.fechaSalida) || /\s/.test(quotation.fechaLlegada) 
-        || /\s/.test(quotation.costo) || /\s/.test(quotation.vehiculo))return alert('espacios en blanco')
+        /\s/.test(quotation.fechaSalida) || /\s/.test(quotation.costo) || 
+        /\s/.test(quotation.vehiculo))return alert('espacios en blanco')
 
         if(quotation.email && quotation.celular && quotation.origen && quotation.destino && quotation.fechaSalida
-            && quotation.fechaLlegada && quotation.costo && quotation.vehiculo){
+            && quotation.costo && quotation.vehiculo){
                 await dispatch(createUser(quotation))
                 await dispatch(editQuotation(quotation))
                 return alert('editado exitosamente')
@@ -123,10 +121,6 @@ export default function EditQuotation(){
                     
                     <label>Fecha de salida:</label>
                     <input type="date" className="form-control" id="departureDate" name="fechaSalida" value={quotation.fechaSalida} onChange={(e) => handleChangeQuotation(e)}/>
-                    <hr></hr>
-                    
-                    <label>Fecha de llegada:</label>
-                    <input type="date" className="form-control" id="arriveDate" name="fechaLlegada" value={quotation.fechaLlegada} onChange={(e) => handleChangeQuotation(e)}/>
                     <hr></hr>
                     
                     <label htmlFor="inputState" className="form-label">Tipo de transporte</label>
