@@ -1,18 +1,18 @@
 import {
     GET_ALL_LOCATION,
     GET_ALL_VEHICLES,
-    GET_ALL_QUOTES,
-    GET_QUOTE,
-    CREATE_QUOTE,
-    EDIT_QUOTE,
-    DELETE_QUOTE
+    GET_ALL_QUOTATION,
+    GET_QUOTATION,
+    CREATE_QUOTATION,
+    EDIT_QUOTATION,
+    DELETE_QUOTATION
 } from '../Actions/types'
 
 const initialState = {
-    quotes : [],
+    quotations : [],
     locations : [],
     vehicles : [],
-    currentQuote : [] 
+    currentQuotation : [] 
 }
 
 function rootReducer(state = initialState, {type,payload}){
@@ -29,28 +29,28 @@ function rootReducer(state = initialState, {type,payload}){
                 vehicles : payload
             }
 
-        case GET_ALL_QUOTES:
+        case GET_ALL_QUOTATION:
             return{
                 ...state,
-                quotes : payload
+                quotations : payload
             }
 
-        case GET_QUOTE:
+        case GET_QUOTATION:
             return{
                 ...state,
-                currentQuote : payload
+                currentQuotation : payload
             }
 
-        case CREATE_QUOTE:
+        case CREATE_QUOTATION:
             return state
         
-        case EDIT_QUOTE:
+        case EDIT_QUOTATION:
             return{
                 ...state,
-                currentQuote : payload
+                currentQuotation : payload
             }
 
-        case DELETE_QUOTE:
+        case DELETE_QUOTATION:
             return state    
             
         default:

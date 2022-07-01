@@ -1,15 +1,15 @@
-import {getAllLocation, getAllVehicles, createUser, createQuote} from '../Redux/Actions/index'
+import {getAllLocation, getAllVehicles, createUser, createQuotation} from '../Redux/Actions/index'
 import '../css/index.css'
 import { useSelector,useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 
-export default function CreateQuote(){
+export default function CreateQuotation(){
     const dispatch = useDispatch() 
 
     const locations = useSelector((state) => state.locations)
     const vehicles = useSelector((state) => state.vehicles)
 
-    const [quote, setquote] = useState(
+    const [quotation, setquotation] = useState(
         {
             email:'',
             origen:'',
@@ -33,45 +33,45 @@ export default function CreateQuote(){
     },[])
 
     const handleChangeUser = (e) => {
-        if(e.target.name === 'email') setquote({...quote, [e.target.name]:e.target.value})
+        if(e.target.name === 'email') setquotation({...quotation, [e.target.name]:e.target.value})
         setuser({
             ...user,
             [e.target.name]:e.target.value
         })
     }
 
-    const handleChangeQuote = (e) => {
-        setquote({
-            ...quote,
+    const handleChangeQuotation = (e) => {
+        setquotation({
+            ...quotation,
             [e.target.name] : Number(e.target.value) && e.target.name !== 'celular'? Number(e.target.value): e.target.value
         })
     }
 
     const checkCost = (e) => {
         e.preventDefault()
-        if(quote.email && quote.origen && quote.destino && 
-            quote.fechaSalida && quote.fechaLlegada && quote.vehiculo){
-            return setquote({...quote,costo:Math.floor(Math.random(100)*500000)})
+        if(quotation.email && quotation.origen && quotation.destino && 
+            quotation.fechaSalida && quotation.fechaLlegada && quotation.vehiculo){
+            return setquotation({...quotation,costo:Math.floor(Math.random(100)*500000)})
         }
         return alert('Hay campos sin llenar')
     }
 
-    const submitQuote = async (e) => {
+    const submitQuotation = async (e) => {
         e.preventDefault()
         if(/\s/.test(user.nombre) || /\s/.test(user.celular) || 
         /\s/.test(user.email)) return alert('esapacios en blanco')
 
-        if(/\s/.test(quote.origen) || /\s/.test(quote.destino) || 
-        /\s/.test(quote.fechaSalida) || /\s/.test(quote.fechaLlegada) 
-        || /\s/.test(quote.costo) || /\s/.test(quote.vehiculo))return alert('espacios en blanco')
+        if(/\s/.test(quotation.origen) || /\s/.test(quotation.destino) || 
+        /\s/.test(quotation.fechaSalida) || /\s/.test(quotation.fechaLlegada) 
+        || /\s/.test(quotation.costo) || /\s/.test(quotation.vehiculo))return alert('espacios en blanco')
 
-        if(quote.email && quote.origen && quote.destino && 
-            quote.fechaSalida && quote.fechaLlegada && 
-            quote.vehiculo && quote.costo && user.nombre
+        if(quotation.email && quotation.origen && quotation.destino && 
+            quotation.fechaSalida && quotation.fechaLlegada && 
+            quotation.vehiculo && quotation.costo && user.nombre
             && user.email && user.celular){
             await dispatch(createUser(user))
-            await dispatch(createQuote(quote))
-            setquote({
+            await dispatch(createQuotation(quotation))
+            setquotation({
                 email:'',
                 origen:'',
                 destino:'',
@@ -92,10 +92,10 @@ export default function CreateQuote(){
     }
 
     return(
-        <div className="CreateQuote">
+        <div className="createQuotation">
             <div className="container" >
                 <h2>Cotización</h2>
-                <form className="row g-3" onSubmit={(e) => submitQuote(e)}>
+                <form className="row g-3" onSubmit={(e) => submitQuotation(e)}>
                     <div className="col-md-6">
                         <label id='name' className="form-label">Nombre</label>
                         <input type="text" className="form-control" id="inputEmail4" name='nombre' value={user.nombre} onChange={(e)=> handleChangeUser(e)}/>
@@ -114,7 +114,7 @@ export default function CreateQuote(){
                     </div>
                     <div className="col-md-6">
                         <label for="inputState" className="form-label">Origen</label>
-                        <select id="origin" className="form-select" onChange={(e) => handleChangeQuote(e)} name="origen">
+                        <select id="origin" className="form-select" onChange={(e) => handleChangeQuotation(e)} name="origen">
                             <option selected={true} disabled={true}>Selecciona</option>
                             {locations.length?
                             locations.map(location => (<option key={location.id} value={location.id} name="origen">{location.nombre}</option>)):null}
@@ -122,7 +122,7 @@ export default function CreateQuote(){
                     </div>
                     <div className="col-md-6">
                         <label for="inputState" className="form-label">Destino</label>
-                        <select id="arrival" className="form-select" onChange={(e) => handleChangeQuote(e)} name="destino">
+                        <select id="arrival" className="form-select" onChange={(e) => handleChangeQuotation(e)} name="destino">
                             <option selected={true} disabled={true}>Selecciona</option>
                             {locations.length?
                             locations.map(location => (<option key={location.id} value={location.id} name="destino">{location.nombre}</option>)):null}
@@ -130,15 +130,15 @@ export default function CreateQuote(){
                     </div>
                     <div className="col-md-4">
                         <label for="inputCity" className="form-label">Fecha salida</label>
-                        <input type="date" className="form-control" id="departureDate" onChange={(e) => handleChangeQuote(e)} name="fechaSalida"/>
+                        <input type="date" className="form-control" id="departureDate" onChange={(e) => handleChangeQuotation(e)} name="fechaSalida"/>
                     </div>
                     <div className="col-md-4">
                         <label for="inputCity" className="form-label">Fecha llegada</label>
-                        <input type="date" className="form-control" id="arrivalDate" onChange={(e) => handleChangeQuote(e)} name="fechaLlegada"/>
+                        <input type="date" className="form-control" id="arrivalDate" onChange={(e) => handleChangeQuotation(e)} name="fechaLlegada"/>
                     </div>
                     <div className="col-md-4">
                         <label for="inputState" className="form-label">Vehiculo</label>
-                        <select id="vehicle" className="form-select" onChange={(e) => handleChangeQuote(e)} name="vehiculo">
+                        <select id="vehicle" className="form-select" onChange={(e) => handleChangeQuotation(e)} name="vehiculo">
                             <option selected={true} disabled={true}>Selecciona</option>
                             {vehicles.length?
                             vehicles.map(vehicle => (<option type="number" key={vehicle.id} value={vehicle.id} name="vehiculo">{vehicle.nombre}</option>)):null}
@@ -149,7 +149,7 @@ export default function CreateQuote(){
                     </div>
                     <div className="col-4">
                         <h4>
-                           $ {quote.costo}
+                           $ {quotation.costo}
                         </h4>
                     </div>
                     <div className="col-12">

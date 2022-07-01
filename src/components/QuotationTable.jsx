@@ -1,20 +1,20 @@
 import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import {getAllQuotes,deleteQuote} from '../Redux/Actions/index'
+import {getAllQuotations,deleteQuotation} from '../Redux/Actions/index'
 import '../css/index.css'
 import { useEffect,useState } from 'react'
 
 
-export default function QuotesTable(){
+export default function QuotationTable(){
 
     const dispatch = useDispatch()
 
-    const quotes = useSelector((state) => state.quotes)
+    const quotations = useSelector((state) => state.quotations)
     const [warning, setwarning] = useState(false)
     const [id,setid] = useState()
 
     useEffect(()=>{
-        dispatch(getAllQuotes())
+        dispatch(getAllQuotations())
     },[])
 
     const modalWarning = (id) => {
@@ -23,8 +23,8 @@ export default function QuotesTable(){
     } 
 
     const deleteQ = async () => {
-        await dispatch(deleteQuote(id))
-        await dispatch(getAllQuotes())
+        await dispatch(deleteQuotation(id))
+        await dispatch(getAllQuotations())
         return setwarning(!warning)
     }
 
@@ -41,15 +41,15 @@ export default function QuotesTable(){
                         </tr>
                     </thead>
                     <tbody className="table-group-divider">
-                        {quotes.length?quotes.map(quote => (
-                            <tr key={quote.id}>
-                                <th scope="row">{quote.id}</th>
-                                <td>{quote.usuario.nombre}</td>
-                                <td>{quote.usuario.email}</td>
+                        {quotations.length?quotations.map(quotation => (
+                            <tr key={quotation.id}>
+                                <th scope="row">{quotation.id}</th>
+                                <td>{quotation.usuario.nombre}</td>
+                                <td>{quotation.usuario.email}</td>
                                 <td>
-                                    <Link to={'/quoteview/'+quote.id} className='view'><i className="fas fa-eye m-2"></i></Link>
-                                    <Link to={'/editquote/'+quote.id} className='edit'><i className="fas fa-pen m-2"></i></Link>
-                                    <i className="fas fa-trash m-2" onClick={() => modalWarning(quote.id)}></i>
+                                    <Link to={'/quoteview/'+quotation.id} className='view'><i className="fas fa-eye m-2"></i></Link>
+                                    <Link to={'/editquote/'+quotation.id} className='edit'><i className="fas fa-pen m-2"></i></Link>
+                                    <i className="fas fa-trash m-2" onClick={() => modalWarning(quotation.id)}></i>
                                 </td>
                             </tr>
                         )):null}

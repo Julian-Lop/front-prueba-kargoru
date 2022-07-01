@@ -1,9 +1,9 @@
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom'
 import Navbar from './components/Navbar'
-import CreateQuote from './components/CreateQuote';
-import QuotesTable from './components/QuotesTable';
-import QuoteView from './components/QuoteView';
-import EditQuote from './components/EditQuote';
+import CreateQuotation from './components/CreateQuotation'
+import QuotationTable from './components/QuotationTable'
+import QuotationView from './components/QuotationView'
+import EditQuotation from './components/EditQuotation'
 import './App.css';
 
 function App() {
@@ -14,10 +14,10 @@ function App() {
       <Navbar/> 
       <Routes>
         <Route path='*' element={<Navigate to="/quotestable"/>}/>
-        <Route path='/createquote' element={<CreateQuote/>}/>
-        <Route path='/quotestable' element={<QuotesTable/>}/>
-        <Route path='/quoteview/:id' element={<QuoteView/>}/>
-        <Route path='/editquote/:id' element={<EditQuote/>}/>
+        <Route path='/createquote' element={<CreateQuotation/>}/>
+        <Route path='/quotestable' element={<QuotationTable/>}/>
+        <Route path='/quoteview/:id' element={<QuotationView/>}/>
+        <Route path='/editquote/:id' element={<EditQuotation/>}/>
       </Routes>
     </Router>
    </div> 

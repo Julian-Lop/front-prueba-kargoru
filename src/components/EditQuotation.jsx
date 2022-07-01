@@ -1,19 +1,19 @@
 import {useParams} from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import { useEffect, useState } from 'react'
-import {getQuote,getAllLocation, getAllVehicles, editQuote, createUser} from '../Redux/Actions/index'
+import {getQuotation,getAllLocation, getAllVehicles, editQuotation, createUser} from '../Redux/Actions/index'
 import '../css/index.css'
 
-export default function EditQuote(){
+export default function EditQuotation(){
     const {id} = useParams() 
     const dispatch = useDispatch()
 
     const locations = useSelector((state) => state.locations)
     const vehicles = useSelector((state) => state.vehicles)
-    const currentQuote = useSelector((state) => state.currentQuote)
+    const currentQuotation = useSelector((state) => state.currentQuotation)
 
 
-    const [quote, setquote] = useState({
+    const [quotation, setquotation] = useState({
             id:'',
             nombre:'',
             email:'',
@@ -27,51 +27,51 @@ export default function EditQuote(){
     })
 
     useEffect(()=>{
-        dispatch(getQuote(Number(id)))
+        dispatch(getQuotation(Number(id)))
         dispatch(getAllLocation())
         dispatch(getAllVehicles())
     },[])
 
     useEffect(()=>{
-        if(currentQuote){
+        if(currentQuotation){
             fillState()
         }
-    },[currentQuote])
+    },[currentQuotation])
 
     const fillState = () => {
-        quote.nombre = currentQuote.usuario?currentQuote.usuario.nombre : ''
-        quote.id = currentQuote.id
-        quote.email = currentQuote.usuario? currentQuote.usuario.email : ''
-        quote.celular = currentQuote.usuario? currentQuote.usuario.celular : ''
-        quote.origen = currentQuote.origenId
-        quote.destino = currentQuote.destinoId
-        quote.fechaSalida = currentQuote.fechaSalida
-        quote.fechaLlegada = currentQuote.fechaLlegada
-        quote.costo = currentQuote.costo
-        quote.vehiculo = currentQuote.vehiculoId
+        quotation.nombre = currentQuotation.usuario?currentQuotation.usuario.nombre : ''
+        quotation.id = currentQuotation.id
+        quotation.email = currentQuotation.usuario? currentQuotation.usuario.email : ''
+        quotation.celular = currentQuotation.usuario? currentQuotation.usuario.celular : ''
+        quotation.origen = currentQuotation.origenId
+        quotation.destino = currentQuotation.destinoId
+        quotation.fechaSalida = currentQuotation.fechaSalida
+        quotation.fechaLlegada = currentQuotation.fechaLlegada
+        quotation.costo = currentQuotation.costo
+        quotation.vehiculo = currentQuotation.vehiculoId
     }
 
-    const handleChangeQuote = (e) => {
-        setquote({
-            ...quote,
+    const handleChangeQuotation = (e) => {
+        setquotation({
+            ...quotation,
             [e.target.name]: Number(e.target.value) && e.target.name !== 'celular'? Number(e.target.value): e.target.value
         })
     }
 
-    const submitQuote = async (e) => {
+    const submitQuotation = async (e) => {
         e.preventDefault()
 
-        if(/\s/.test(quote.nombre) || /\s/.test(quote.celular) || 
-        /\s/.test(quote.email)) return alert('esapacios en blanco')
+        if(/\s/.test(quotation.nombre) || /\s/.test(quotation.celular) || 
+        /\s/.test(quotation.email)) return alert('esapacios en blanco')
 
-        if(/\s/.test(quote.origen) || /\s/.test(quote.destino) || 
-        /\s/.test(quote.fechaSalida) || /\s/.test(quote.fechaLlegada) 
-        || /\s/.test(quote.costo) || /\s/.test(quote.vehiculo))return alert('espacios en blanco')
+        if(/\s/.test(quotation.origen) || /\s/.test(quotation.destino) || 
+        /\s/.test(quotation.fechaSalida) || /\s/.test(quotation.fechaLlegada) 
+        || /\s/.test(quotation.costo) || /\s/.test(quotation.vehiculo))return alert('espacios en blanco')
 
-        if(quote.email && quote.celular && quote.origen && quote.destino && quote.fechaSalida
-            && quote.fechaLlegada && quote.costo && quote.vehiculo){
-                await dispatch(createUser(quote))
-                await dispatch(editQuote(quote))
+        if(quotation.email && quotation.celular && quotation.origen && quotation.destino && quotation.fechaSalida
+            && quotation.fechaLlegada && quotation.costo && quotation.vehiculo){
+                await dispatch(createUser(quotation))
+                await dispatch(editQuotation(quotation))
                 return alert('editado exitosamente')
         }else{
             return alert('hay campos vacios')
@@ -79,28 +79,28 @@ export default function EditQuote(){
     }
 
     return(
-        <div className='EditQuote'>
+        <div className='editQuotation'>
             <div className="container">
 
-            {locations.length && currentQuote && quote?<div className="card">
+            {locations.length && currentQuotation && quotation?<div className="card">
                 <h1 className='m-2'>Editar cotización</h1>
                 <div className="card-body">
                     <h5 className="card-title">Cotizacion ID:{id}</h5>
-                    <h6>Para: {quote.email?quote.nombre:null}</h6>
+                    <h6>Para: {quotation.email?quotation.nombre:null}</h6>
                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     <br></br>
                     
                     <label>Email:</label>
-                    <input type="text" className="form-control" id="email" name="email" value={quote.email} onChange={(e) => handleChangeQuote(e)} />
+                    <input type="text" className="form-control" id="email" name="email" value={quotation.email} onChange={(e) => handleChangeQuotation(e)} />
                     <hr></hr>
 
                     <label>Celular:</label>
-                    <input type="text" className="form-control" id="celular" name="celular" value={quote.celular}  onChange={(e) => handleChangeQuote(e)} />
+                    <input type="text" className="form-control" id="celular" name="celular" value={quotation.celular}  onChange={(e) => handleChangeQuotation(e)} />
                     <hr></hr>
                     
 
                     <label htmlFor="inputState" className="form-label">Origen</label>
-                    <select id="origin" className="form-select" onChange={(e) => handleChangeQuote(e)} name="origen" value={quote.origen}>
+                    <select id="origin" className="form-select" onChange={(e) => handleChangeQuotation(e)} name="origen" value={quotation.origen}>
                         <option selected={true} disabled={true}>Selecciona</option>
                         {locations.length?
                         locations.map(location => (<option key={location.id} value={location.id} name="origen">{location.nombre}</option>)):null}
@@ -109,7 +109,7 @@ export default function EditQuote(){
                     
                     
                     <label htmlFor="inputState" className="form-label">Destino</label>
-                    <select id="arrival" className="form-select" onChange={(e) => handleChangeQuote(e)} name="destino" value={quote.destino}>
+                    <select id="arrival" className="form-select" onChange={(e) => handleChangeQuotation(e)} name="destino" value={quotation.destino}>
                         <option selected={true} disabled={true}>Selecciona</option>
                         {locations.length?
                         locations.map(location => (<option key={location.id} value={location.id} name="destino">{location.nombre}</option>)):null}
@@ -117,15 +117,15 @@ export default function EditQuote(){
                     <hr></hr>
                     
                     <label>Fecha de salida:</label>
-                    <input type="date" className="form-control" id="departureDate" name="fechaSalida" value={quote.fechaSalida} onChange={(e) => handleChangeQuote(e)}/>
+                    <input type="date" className="form-control" id="departureDate" name="fechaSalida" value={quotation.fechaSalida} onChange={(e) => handleChangeQuotation(e)}/>
                     <hr></hr>
                     
                     <label>Fecha de llegada:</label>
-                    <input type="date" className="form-control" id="arriveDate" name="fechaLlegada" value={quote.fechaLlegada} onChange={(e) => handleChangeQuote(e)}/>
+                    <input type="date" className="form-control" id="arriveDate" name="fechaLlegada" value={quotation.fechaLlegada} onChange={(e) => handleChangeQuotation(e)}/>
                     <hr></hr>
                     
                     <label htmlFor="inputState" className="form-label">Vehiculo</label>
-                    <select id="vehicle" className="form-select" onChange={(e) => handleChangeQuote(e)} name="vehiculo" value={quote.vehiculo}>
+                    <select id="vehicle" className="form-select" onChange={(e) => handleChangeQuotation(e)} name="vehiculo" value={quotation.vehiculo}>
                         <option selected={true} disabled={true}>Selecciona</option>
                         {vehicles.length?
                         vehicles.map(vehicle => (<option type="number" key={vehicle.id} value={vehicle.id} name="vehiculo">{vehicle.nombre}</option>)):null}
@@ -135,10 +135,10 @@ export default function EditQuote(){
                     <label>Costo total:</label>
                     <div className="input-group">
                     <div className="input-group-text">$</div>
-                    <input type="number" className="form-control" id="cost" value={quote.costo} name="costo" onChange={(e) => handleChangeQuote(e)} />
+                    <input type="number" className="form-control" id="cost" value={quotation.costo} name="costo" onChange={(e) => handleChangeQuotation(e)} />
                     </div>
                     <br></br>
-                    <button type='submit' onClick={(e) => submitQuote(e)} className="btn btn-warning">Editar<span className="fas fa-pen m-2" disabled={true}></span></button>
+                    <button type='submit' onClick={(e) => submitQuotation(e)} className="btn btn-warning">Editar<span className="fas fa-pen m-2" disabled={true}></span></button>
                 </div>
                 </div>
                 :
