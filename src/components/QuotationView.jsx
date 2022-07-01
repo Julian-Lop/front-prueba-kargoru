@@ -52,10 +52,6 @@ export default function QuotationView(){
                         <input type="text" className="form-control" id="departureDate" value={currentQuotation.fechaSalida} disabled={true} />
                         <hr></hr>
                        
-                        <label>Fecha de llegada:</label>
-                        <input type="text" className="form-control" id="arriveDate" value={currentQuotation.fechaLlegada} disabled={true} />
-                        <hr></hr>
-                       
                         <label>Tipo de transporte:</label>
                         <input type="text" className="form-control" id="vehicle" value={currentQuotation.vehiculo.nombre} disabled={true} />
                         <hr></hr>
