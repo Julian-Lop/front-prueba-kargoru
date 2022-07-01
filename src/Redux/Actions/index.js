@@ -2,11 +2,11 @@ import axios from "axios";
 import{
     GET_ALL_LOCATION,
     GET_ALL_VEHICLES,
-    GET_ALL_QUOTES,
-    GET_QUOTE,
-    CREATE_QUOTE,
-    EDIT_QUOTE,
-    DELETE_QUOTE,
+    GET_ALL_QUOTATION,
+    GET_QUOTATION,
+    CREATE_QUOTATION,
+    EDIT_QUOTATION,
+    DELETE_QUOTATION,
     CREATE_USER
 }from './types'
 
@@ -35,55 +35,55 @@ export const getAllVehicles = () => {
     }
 }
 
-export const getAllQuotes = () => {
+export const getAllQuotations = () => {
     return async function(dispatch){
         try {
-            let json = await axios(url+'/getAllQuotes')
-            if(json.data.cotizaciones) return dispatch({type:GET_ALL_QUOTES, payload: json.data.cotizaciones})
+            let json = await axios(url+'/getAllQuotations')
+            if(json.data.cotizaciones) return dispatch({type:GET_ALL_QUOTATION, payload: json.data.cotizaciones})
         } catch (error) {
             console.log(error)
         }
     }
 }
 
-export const getQuote = (id) => {
+export const getQuotation = (id) => {
     return async function(dispatch){
         try {
-            let json = await axios(url+'/getQuote/'+id)
-            if(json.data.cotizacion) return dispatch({type:GET_QUOTE, payload: json.data.cotizacion})
+            let json = await axios(url+'/getQuotation/'+id)
+            if(json.data.cotizacion) return dispatch({type:GET_QUOTATION, payload: json.data.cotizacion})
         } catch (error) {
             console.log(error)
         }
     }
 }
 
-export const createQuote = (quote) => {
+export const createQuotation = (quotation) => {
     return async function(dispatch){
         try {
-            let json = await axios.post(url+'/createQuote',quote)
-            if(json.data.cotizacion) return dispatch({type:CREATE_QUOTE, payload: json.data.cotizacion})
+            let json = await axios.post(url+'/createQuotation',quotation)
+            if(json.data.cotizacion) return dispatch({type:CREATE_QUOTATION, payload: json.data.cotizacion})
         } catch (error) {
             console.log(error)
         }
     }
 }
 
-export const editQuote = (quote) => {
+export const editQuotation = (quotation) => {
     return async function(dispatch){
         try {
-            let json = await axios.put(url+'/editQuote',quote)
-            if(json.data.cotizacion) return dispatch({type:EDIT_QUOTE, payload:json.data.cotizacion})
+            let json = await axios.put(url+'/editQuotation',quotation)
+            if(json.data.cotizacion) return dispatch({type:EDIT_QUOTATION, payload:json.data.cotizacion})
         } catch (error) {
             console.log(error)
         }
     }
 }
 
-export const deleteQuote = (id) => {
+export const deleteQuotation = (id) => {
     return async function(dispatch){
         try {
-            let json = await axios.delete(url+'/deleteQuote/'+id)
-            if(json.data.borrado) return dispatch({type:DELETE_QUOTE,payload:json.data.borrado})
+            let json = await axios.delete(url+'/deleteQuotation/'+id)
+            if(json.data.borrado) return dispatch({type:DELETE_QUOTATION,payload:json.data.borrado})
         } catch (error) {
             console.log(error)
         }
