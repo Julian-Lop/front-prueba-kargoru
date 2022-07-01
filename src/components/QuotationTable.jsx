@@ -10,12 +10,17 @@ export default function QuotationTable(){
     const dispatch = useDispatch()
 
     const quotations = useSelector((state) => state.quotations)
+    const vehicles = useSelector((state) => state.vehicles)
     const [warning, setwarning] = useState(false)
     const [id,setid] = useState()
 
     useEffect(()=>{
         dispatch(getAllQuotations())
     },[])
+
+    useEffect(()=>{
+        dispatch(getAllQuotations())
+    },[dispatch])
 
     const modalWarning = (id) => {
         setwarning(!warning)
@@ -24,7 +29,7 @@ export default function QuotationTable(){
 
     const deleteQ = async () => {
         await dispatch(deleteQuotation(id))
-        await dispatch(getAllQuotations())
+        dispatch(getAllQuotations())
         return setwarning(!warning)
     }
 
@@ -36,6 +41,7 @@ export default function QuotationTable(){
                         <tr>
                         <th scope="col">ID Cotización</th>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Tipo Transporte</th>
                         <th scope="col">Email</th>
                         <th scope="col">Acciones</th>
                         </tr>
@@ -45,6 +51,7 @@ export default function QuotationTable(){
                             <tr key={quotation.id}>
                                 <th scope="row">{quotation.id}</th>
                                 <td>{quotation.usuario.nombre}</td>
+                                <td>{vehicles.length > 0 ? vehicles.find(vehicle =>  Number(quotation.vehiculoId) === Number(vehicle.id)).nombre : null}</td>
                                 <td>{quotation.usuario.email}</td>
                                 <td>
                                     <Link to={'/quoteview/'+quotation.id} className='view'><i className="fas fa-eye m-2"></i></Link>
