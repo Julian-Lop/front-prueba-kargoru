@@ -17,7 +17,8 @@ export default function CreateQuotation(){
             fechaSalida:'',
             fechaLlegada:'',
             costo:'',
-            vehiculo:''
+            vehiculo:'',
+            detalleCarga:''
         }
     )
 
@@ -50,7 +51,7 @@ export default function CreateQuotation(){
     const checkCost = (e) => {
         e.preventDefault()
         if(quotation.email && quotation.origen && quotation.destino && 
-            quotation.fechaSalida && quotation.fechaLlegada && quotation.vehiculo){
+            quotation.fechaSalida && quotation.fechaLlegada && quotation.vehiculo && quotation.detalleCarga){
             return setquotation({...quotation,costo:Math.floor(Math.random(100)*500000)})
         }
         return alert('Hay campos sin llenar')
@@ -59,16 +60,21 @@ export default function CreateQuotation(){
     const submitQuotation = async (e) => {
         e.preventDefault()
         if(/\s/.test(user.nombre) || /\s/.test(user.celular) || 
-        /\s/.test(user.email)) return alert('esapacios en blanco')
+        /\s/.test(user.email)) return alert('espacios en blanco')
 
         if(/\s/.test(quotation.origen) || /\s/.test(quotation.destino) || 
         /\s/.test(quotation.fechaSalida) || /\s/.test(quotation.fechaLlegada) 
         || /\s/.test(quotation.costo) || /\s/.test(quotation.vehiculo))return alert('espacios en blanco')
 
+        let f1 = new Date(quotation.fechaSalida)
+        let f2 = new Date(quotation.fechaLlegada)
+
+        if(f1.getTime() > f2.getTime()) return alert('la fecha de llegada debe ser posterior a la de salida')
+
         if(quotation.email && quotation.origen && quotation.destino && 
             quotation.fechaSalida && quotation.fechaLlegada && 
-            quotation.vehiculo && quotation.costo && user.nombre
-            && user.email && user.celular){
+            quotation.vehiculo && quotation.costo && quotation.detalleCarga
+            && user.nombre && user.email && user.celular){
             await dispatch(createUser(user))
             await dispatch(createQuotation(quotation))
             setquotation({
@@ -78,7 +84,8 @@ export default function CreateQuotation(){
                 fechaSalida:'',
                 fechaLlegada:'',
                 costo:'',
-                vehiculo:''
+                vehiculo:'',
+                detalleCarga:''
             })
 
             setuser({
@@ -98,22 +105,22 @@ export default function CreateQuotation(){
                 <form className="row g-3" onSubmit={(e) => submitQuotation(e)}>
                     <div className="col-md-6">
                         <label id='name' className="form-label">Nombre</label>
-                        <input type="text" className="form-control" id="inputEmail4" name='nombre' value={user.nombre} onChange={(e)=> handleChangeUser(e)}/>
+                        <input type="text" className="form-control" id="nombre" name='nombre' value={user.nombre} onChange={(e)=> handleChangeUser(e)}/>
                     </div>
                     <div className="col-md-6">
                         <label id='cellphone' className="form-label">Celular</label>
-                        <input type="text" className="form-control" id="inputPassword4" name='celular' value={user.celular} onChange={(e)=> handleChangeUser(e)}/>
+                        <input type="text" className="form-control" id="celular" name='celular' value={user.celular} onChange={(e)=> handleChangeUser(e)}/>
                     </div>
                     <div className="col-12">
-                        <label for="inputAddress" className="form-label">Email</label>
-                        <label class="visually-hidden" for="specificSizeInputGroupUsername">Username</label>
-                        <div class="input-group">
-                        <div class="input-group-text">@</div>
-                        <input type="email" class="form-control" id="email" placeholder="example@gmail.com" name='email' value={user.email} onChange={(e)=> handleChangeUser(e)}/>
+                        <label htmlFor="inputAddress" className="form-label">Email</label>
+                        <label className="visually-hidden" htmlFor="specificSizeInputGroupUsername">Username</label>
+                        <div className="input-group">
+                        <div className="input-group-text">@</div>
+                        <input type="email" className="form-control" id="email" placeholder="example@gmail.com" name='email' value={user.email} onChange={(e)=> handleChangeUser(e)}/>
                     </div>
                     </div>
                     <div className="col-md-6">
-                        <label for="inputState" className="form-label">Origen</label>
+                        <label htmlFor="inputState" className="form-label">Origen</label>
                         <select id="origin" className="form-select" onChange={(e) => handleChangeQuotation(e)} name="origen">
                             <option selected={true} disabled={true}>Selecciona</option>
                             {locations.length?
@@ -121,7 +128,7 @@ export default function CreateQuotation(){
                         </select>
                     </div>
                     <div className="col-md-6">
-                        <label for="inputState" className="form-label">Destino</label>
+                        <label htmlFor="inputState" className="form-label">Destino</label>
                         <select id="arrival" className="form-select" onChange={(e) => handleChangeQuotation(e)} name="destino">
                             <option selected={true} disabled={true}>Selecciona</option>
                             {locations.length?
@@ -129,20 +136,24 @@ export default function CreateQuotation(){
                         </select>
                     </div>
                     <div className="col-md-4">
-                        <label for="inputCity" className="form-label">Fecha salida</label>
+                        <label htmlFor="inputCity" className="form-label">Fecha salida</label>
                         <input type="date" className="form-control" id="departureDate" onChange={(e) => handleChangeQuotation(e)} name="fechaSalida"/>
                     </div>
                     <div className="col-md-4">
-                        <label for="inputCity" className="form-label">Fecha llegada</label>
+                        <label htmlFor="inputCity" className="form-label">Fecha llegada</label>
                         <input type="date" className="form-control" id="arrivalDate" onChange={(e) => handleChangeQuotation(e)} name="fechaLlegada"/>
                     </div>
                     <div className="col-md-4">
-                        <label for="inputState" className="form-label">Vehiculo</label>
+                        <label htmlFor="inputState" className="form-label">Tipo de transporte</label>
                         <select id="vehicle" className="form-select" onChange={(e) => handleChangeQuotation(e)} name="vehiculo">
                             <option selected={true} disabled={true}>Selecciona</option>
                             {vehicles.length?
                             vehicles.map(vehicle => (<option type="number" key={vehicle.id} value={vehicle.id} name="vehiculo">{vehicle.nombre}</option>)):null}
                         </select>
+                    </div>
+                    <div className="col-md-12">
+                        <label id='name' className="form-label">Detalle de Carga</label>
+                        <input type="text" className="form-control" id="detalleCarga" name='detalleCarga' value={quotation.detalleCarga} onChange={(e) => handleChangeQuotation(e)}/>
                     </div>
                     <div className="col-8">
                         <button onClick={(e) => checkCost(e) } className="btn btn-info">consultar costo</button>

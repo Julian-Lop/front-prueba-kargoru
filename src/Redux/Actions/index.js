@@ -41,7 +41,7 @@ export const getAllQuotations = () => {
             let json = await axios(url+'/getAllQuotations')
             if(json.data.cotizaciones) return dispatch({type:GET_ALL_QUOTATION, payload: json.data.cotizaciones})
         } catch (error) {
-            console.log(error)
+            return dispatch({type:GET_ALL_QUOTATION, payload: []})
         }
     }
 }

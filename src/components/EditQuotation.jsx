@@ -23,7 +23,8 @@ export default function EditQuotation(){
             fechaSalida:'',
             fechaLlegada:'',
             costo:'',
-            vehiculo:''
+            vehiculo:'',
+            detalleCarga:''
     })
 
     useEffect(()=>{
@@ -49,6 +50,7 @@ export default function EditQuotation(){
         quotation.fechaLlegada = currentQuotation.fechaLlegada
         quotation.costo = currentQuotation.costo
         quotation.vehiculo = currentQuotation.vehiculoId
+        quotation.detalleCarga = currentQuotation.detalleCarga
     }
 
     const handleChangeQuotation = (e) => {
@@ -87,7 +89,10 @@ export default function EditQuotation(){
                 <div className="card-body">
                     <h5 className="card-title">Cotizacion ID:{id}</h5>
                     <h6>Para: {quotation.email?quotation.nombre:null}</h6>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p className="card-text">
+                        Detalles de la carga: <br></br>
+                        {currentQuotation.detalleCarga}
+                    </p>
                     <br></br>
                     
                     <label>Email:</label>
@@ -124,7 +129,7 @@ export default function EditQuotation(){
                     <input type="date" className="form-control" id="arriveDate" name="fechaLlegada" value={quotation.fechaLlegada} onChange={(e) => handleChangeQuotation(e)}/>
                     <hr></hr>
                     
-                    <label htmlFor="inputState" className="form-label">Vehiculo</label>
+                    <label htmlFor="inputState" className="form-label">Tipo de transporte</label>
                     <select id="vehicle" className="form-select" onChange={(e) => handleChangeQuotation(e)} name="vehiculo" value={quotation.vehiculo}>
                         <option selected={true} disabled={true}>Selecciona</option>
                         {vehicles.length?
